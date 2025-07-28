@@ -1,0 +1,46 @@
+<html>
+
+<head>
+    <script>
+        function handleInput() {
+
+            let day = Number(document.getElementById("day").value);
+
+
+            let Day = "";
+
+
+            if (day == 1) {
+                Day = "Monday";
+            } else if (day == 2) {
+                Day = "Tuesday";
+            } else if (day == 3) {
+                Day = "Wednesday";
+            } else if (day == 4) {
+                Day = "Thursday";
+            } else if (day == 5) {
+                Day = "Friday";
+            } else if (day == 6) {
+                Day = "Saturday";
+            } else if (day == 7) {
+                Day = "Sunday";
+            } else {
+                Day = "Invalid day";
+            }
+
+
+            document.getElementById("result").innerText = Day;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Find the Day of the Week</h1>
+    <label>Enter day number (1-7): </label>
+    <input type="number" id="day" placeholder="" style="width: 30px;">
+
+    <button onclick="handleInput()">Check</button>
+    <p id="result"></p>
+</body>
+
+</html>
