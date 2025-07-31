@@ -1,5 +1,6 @@
 import { VariableInJsx } from'./VariableInJsx'
 import { ConditionInJsx } from './ConditionInJsx'
+import { FunctionInJsx } from './FunctionInJsx'
 function  App() {
     return(
         <div>
@@ -9,6 +10,7 @@ function  App() {
 
             <VariableInJsx/>
             <ConditionInJsx/>
+            <FunctionInJsx/>
         </div>
         
     )
