@@ -1,49 +1,50 @@
-import React from 'react';
+function DoneTodoPage(props) {
+  let todoArr = props.todo;
 
-function DoneTodoPage() {
   return (
-    <main className="flex items-center justify-center min-h-screen bg-gray-100 text-center">
-      
-         <table id="todo-table">
-            
+    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-gray-900 to-black flex items-center justify-center p-6">
+      <div className="bg-gray-950 shadow-2xl rounded-3xl w-full max-w-3xl overflow-hidden border border-gray-800">
+        {/* Header */}
+        <div className="bg-gray-800 p-6 border-b border-gray-700">
+          <h2 className="text-white text-4xl font-bold text-center">Completed Todos</h2>
+        </div>
+
+        {/* Table */}
+        <div className="p-8 bg-gray-950">
+          <table className="table-auto w-full border-collapse text-white">
+            <thead>
+              <tr className="bg-gradient-to-r from-purple-700 to-indigo-700">
+                <th className="border border-gray-800 px-4 py-3 text-left text-sm">Todo Title</th>
+                <th className="border border-gray-800 px-4 py-3 text-left text-sm">Completed On</th>
+              </tr>
+            </thead>
             <tbody>
-                <tr>
-                <th className="border px-4 py-2">Complete Todo Title</th>
-                <th className="border px-4 py-2">Completed On</th>
-                </tr>
-                <tr>
-                    <td className="border px-4 py-2">Meditate For 10 Mins</td>
-                     <td className="border px-4 py-2">4/Aug/2025</td>
-                </tr>
-                 <tr>
-                    <td className="border px-4 py-2">Watch React Tutorial</td>
-                     <td className="border px-4 py-2">6/Aug/2025</td>
-                </tr>
-                 <tr>
-                    <td className="border px-4 py-2">Buy Groceries</td>
-                     <td className="border px-4 py-2">1/Aug/2025</td>
-                </tr>
-                 <tr>
-                    <td className="border px-4 py-2">Review PR On GitHub</td>
-                     <td className="border px-4 py-2">4/Aug/2025</td>
-                </tr>
-                 <tr>
-                    <td className="border px-4 py-2">Drink 2L water</td>
-                     <td className="border px-4 py-2">10/Sep/2025</td>
-                </tr>
-                 <tr>
-                    <td className="border px-4 py-2">Streach after work</td>
-                     <td className="border px-4 py-2">15/Dec/2025</td>
-                </tr>
-                </tbody>
-            
-         </table>
+              {todoArr.map((todo) =>
+                todo.status === "completed" ? (
+                  <tr
+                    key={todo.id}
+                    className="bg-gray-900 even:bg-gray-800 hover:bg-indigo-800 transition-colors duration-300"
+                  >
+                    <td className="border border-gray-800 px-4 py-2 text-sm">{todo.todoTitle}</td>
+                    <td className="border border-gray-800 px-4 py-2 text-sm">
+                      {todo.completedDate
+                        ? new Date(todo.completedDate).toLocaleDateString()
+                        : "N/A"}
+                    </td>
+                  </tr>
+                ) : null
+              )}
+            </tbody>
+          </table>
+        </div>
 
-        
-      
-    </main>
+        {/* Footer */}
+        <footer className="bg-gray-900 text-center py-3 text-gray-400 text-xs">
+         
+        </footer>
+      </div>
+    </div>
   );
-
 }
 
 export default DoneTodoPage;

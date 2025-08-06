@@ -1,30 +1,29 @@
-import Header from './Header';
-import HomePage from './HomePage';
-import AddTodoPage from './AddTodoPage';
-import DoneTodoPage from './DoneTodoPage';
-import ShowPage from './ShowTodoPage';
-import Footer from './Footer';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from './Header'
+import HomePage from './HomePage'
+import Footer from './Footer'
+import AddTodoPage from './AddTodoPage'
+import ShowTodoPage from './ShowTodoPage'
+import DoneTodoPage from './DoneTodoPage'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { useState } from 'react'
 
 function App() {
-    return (
-     <div>
-      <BrowserRouter>
-            <Header />
+  let [todo, setTodo] = useState([])
 
-            {/* Routes component used to group route */}
-            <Routes>
-                {/* Route component defines path with our page component */}
-                <Route path="/home" element={<HomePage />} />
-                <Route path="/add" element={<AddTodoPage />} />
-                <Route path="/show" element={<ShowPage />} />
-                <Route path="/done" element={<DoneTodoPage />} />
-            </Routes>
+  return (
+    <BrowserRouter>
+      <Header />
 
-            <Footer />
-        </BrowserRouter>
-           </div>
-    );
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/todo-add" element={<AddTodoPage todo={todo} setTodo={setTodo} />} />
+        <Route path="/todo-show" element={<ShowTodoPage todo={todo} setTodo={setTodo} />} />
+        <Route path="/todo-done" element={<DoneTodoPage todo={todo} setTodo={setTodo}/>} />
+      </Routes>
+
+      <Footer />
+    </BrowserRouter>
+  );
 }
 
-export default App;
+export default App;

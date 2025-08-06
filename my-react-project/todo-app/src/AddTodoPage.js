@@ -1,69 +1,75 @@
 import { useState } from 'react';
 
-function AddTodoPage() {
-  const [name, setName] = useState('');
-  const [dueDate, setDueDate] = useState('');
-  const [status, setStatus] = useState('');
+function AddTodoPage({ todo, setTodo }) {
+  const [formData, setFormData] = useState({
+    todoTitle: '',
+    dueDate: '',
+    status: 'pending',
+  });
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
-    alert(`Form submitted:\nTitle: ${name}\nDue Date: ${dueDate}\nStatus: ${status}`);
-    setName('');
-    setDueDate('');
-    setStatus('');
+
+    setTodo(prev => [
+      ...prev,
+      {
+        id: Date.now(),
+        todoTitle: formData.todoTitle,
+        dueDate: formData.dueDate,
+        status: formData.status,
+        completeDate: '',
+      },
+    ]);
+
+    alert('Todo added!');
   }
 
   return (
-    <div className="max-w-lg mx-auto mt-12 p-8 bg-white text-gray-900 rounded-2xl shadow-xl border border-gray-200">
-      <h2 className="text-3xl font-bold mb-8 text-center text-blue-700">Add a New Todo</h2>
-      
-      <form onSubmit={handleSubmit} className="space-y-6">
-
-        <div>
-          <label className="block mb-2 text-sm font-medium text-gray-700">Todo Title</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
-            placeholder="Enter title"
-            required
-          />
+    <div className="min-h-screen bg-gradient-to-br from-indigo-950 via-gray-900 to-black flex items-center justify-center p-6">
+      <div className="bg-gray-900 shadow-2xl rounded-3xl w-full max-w-2xl overflow-hidden border border-gray-700">
+        <div className="bg-gray-800 p-6">
+          <h2 className="text-white text-4xl font-bold text-center">Add Todo</h2>
         </div>
 
-        <div>
-          <label className="block mb-2 text-sm font-medium text-gray-700">Due Date</label>
-          <input
-            type="date"
-            value={dueDate}
-            onChange={(e) => setDueDate(e.target.value)}
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
-            required
-          />
-        </div>
+        <form onSubmit={handleSubmit} className="p-8 space-y-6 bg-gray-900">
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-1">Todo Title</label>
+            <input
+              type="text"
+              name="todoTitle"
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
+              placeholder="Enter your task"
+              required
+            />
+          </div>
 
-        <div>
-          <label className="block mb-2 text-sm font-medium text-gray-700">Status</label>
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition"
-            required
+          <div>
+            <label className="block text-sm font-medium text-gray-300 mb-1">Due Date</label>
+            <input
+              type="date"
+              name="dueDate"
+              onChange={handleChange}
+              className="w-full px-4 py-3 rounded-lg border border-gray-700 bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-700 hover:brightness-110 text-white font-semibold py-3 rounded-lg shadow-md transition duration-300"
           >
-            <option value="">Select status</option>
-            <option value="Pending">Pending</option>
-            <option value="In Progress">In Progress</option>
-            <option value="Completed">Completed</option>
-          </select>
-        </div>
-
-        <button
-          type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg shadow-md transition"
-        >
-          Submit Todo
-        </button>
-      </form>
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

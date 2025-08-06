@@ -2,35 +2,38 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function Header() {
-    return (
+  return (
+    <div>
+      <nav className="flex bg-gray-900 p-5 justify-between items-center">
+        {/* Left section */}
         <div>
-            <nav className="flex bg-gray-900 p-5 justify-between">
-                <div>
-                    {/* left section */}
-                    <Link to="/add">
-                              <button class="text-white font-bold">Add</button>
-                              
-                              </Link>
-                   
-                </div>
-                <div className="space-x-110">
-                    {/* right section */}
-
-                    <Link to="/show">
-                        <button class="text-white font-bold">Show</button>
-                        </Link>
-                        </div>
-
-                        <div>
-                   
-
-                   <Link to="/done">
-                        <button class="text-white font-bold">Done</button>
-                    </Link>
-                </div>
-            </nav>
+          <Link to="/todo-add">
+            <button className="w-full md:w-auto bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-700 hover:brightness-110 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300">
+              Add
+            </button>
+          </Link>
         </div>
-    )
+
+        {/* Center section */}
+        <div>
+          <Link to="/todo-show">
+            <button className="w-full md:w-auto bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-700 hover:brightness-110 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300">
+              Show
+            </button>
+          </Link>
+        </div>
+
+        {/* Right section */}
+        <div>
+          <Link to="/todo-done">
+            <button className="w-full md:w-auto bg-gradient-to-r from-blue-500 via-indigo-600 to-purple-700 hover:brightness-110 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition duration-300">
+              Done
+            </button>
+          </Link>
+        </div>
+      </nav>
+    </div>
+  );
 }
 
-export default Header;
+export default Header;
