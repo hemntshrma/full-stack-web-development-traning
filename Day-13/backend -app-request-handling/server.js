@@ -7,6 +7,7 @@ app.use(express.json())
 // API section 
 
 
+
 app.post('/insert-person', (request, response) => {
     console.log(`request receivced is  = ${JSON.stringify(request.body)}`)
     response.send(`Person name is ${request.body.personName}`)
@@ -14,7 +15,9 @@ app.post('/insert-person', (request, response) => {
 
 app.post('/insert-person-1', (request, response) => {
     console.log(`request receivced is  = ${JSON.stringify(request.body)}`)
-    response.json(request.body.address)
+    response.json(request.body.address
+       
+    )
 })
 
 

@@ -25,7 +25,7 @@ app.get('/api-2', (request, response) =>
 } )
 
 app.get('/homepage-admin', (request, response) =>
-    {n
+    {
         response.send('this is website homepage')
     }) 
 
