@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {callCreateAPI} from './BackendAPI'
+import {callCreateAPI,callGetAllAPI } from './BackendAPI'
 
 
 function AddTodoPage({ todo, setTodo }) {
@@ -31,6 +31,9 @@ function AddTodoPage({ todo, setTodo }) {
 
     // Make sure callCreateAPI is imported or defined
     await callCreateAPI("/create-todo", newTodo);
+
+    const todoList = await callGetAllAPI('/read-todos');
+    setTodo(todoList);
   }
 
   return (

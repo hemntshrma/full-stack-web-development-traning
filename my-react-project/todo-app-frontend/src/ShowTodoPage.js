@@ -1,19 +1,15 @@
+
+import {callUpdateAPI , callGetAllAPI } from "./BackendAPI"
 function ShowTodoPage(props) {
   const todoArr = props.todo;
 
-  function handleClick(e, todoId) {
-    const newTodoArr = todoArr.map(todo => {
-      if (todo.id === todoId) {
-        return {
-          ...todo,
-          status: "completed",
-          completedDate: new Date()
-        };
-      }
-      return todo;
-    });
-
-    props.setTodo(newTodoArr);
+  async function handleClick(e, todoId) {
+    await  callUpdateAPI('/update-todo',
+      {status : 'completed', completionDate :new Date()},
+      {'todoId' : todoId}
+    )
+let todoList = await callGetAllAPI ('/read-todos');
+    props.setTodo(todoList);
   }
 
   return (
@@ -35,15 +31,14 @@ function ShowTodoPage(props) {
             <tbody>
               {todoArr.map((value) =>
                 value.status === "pending" ? (
-                  <tr
-                    key={value.id}
+                  <tr key={value.todoId}
                     className="bg-gray-800 even:bg-gray-700 hover:bg-indigo-900 transition-colors duration-300"
                   >
                     <td className="px-4 py-2 border-t border-gray-700 text-sm">{value.todoTitle}</td>
                     <td className="px-4 py-2 border-t border-gray-700 text-sm">{value.dueDate}</td>
                     <td className="px-4 py-2 border-t border-gray-700 text-center">
                       <button
-                        onClick={(e) => handleClick(e, value.id)}
+                        onClick={(e) => handleClick (e, value.todoId )}
                         className="bg-gradient-to-r from-green-400 to-green-600 hover:brightness-110 text-black font-semibold px-3 py-1 rounded-md shadow transition text-sm"
                       >
                         ✅
