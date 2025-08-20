@@ -1,14 +1,15 @@
+import { callUpdateAPI, callGetAllAPI } from "./BackendAPI";
 
-import {callUpdateAPI , callGetAllAPI } from "./BackendAPI"
 function ShowTodoPage(props) {
   const todoArr = props.todo;
 
   async function handleClick(e, todoId) {
-    await  callUpdateAPI('/update-todo',
-      {status : 'completed', completionDate :new Date()},
-      {'todoId' : todoId}
-    )
-let todoList = await callGetAllAPI ('/read-todos');
+    await callUpdateAPI(
+      '/update-todo',
+      { status: 'completed', completionDate: new Date() },
+      { 'todoId': todoId }
+    );
+    let todoList = await callGetAllAPI('/read-todos');
     props.setTodo(todoList);
   }
 
@@ -30,29 +31,27 @@ let todoList = await callGetAllAPI ('/read-todos');
             </thead>
             <tbody>
               {todoArr.map((value) =>
-                value.status === "pending" ? (
-                  <tr key={value.todoId}
+                value.status === "pending" && (
+                  <tr
+                    key={value.todoId}
                     className="bg-gray-800 even:bg-gray-700 hover:bg-indigo-900 transition-colors duration-300"
                   >
                     <td className="px-4 py-2 border-t border-gray-700 text-sm">{value.todoTitle}</td>
                     <td className="px-4 py-2 border-t border-gray-700 text-sm">{value.dueDate}</td>
                     <td className="px-4 py-2 border-t border-gray-700 text-center">
                       <button
-                        onClick={(e) => handleClick (e, value.todoId )}
+                        onClick={(e) => handleClick(e, value.todoId)}
                         className="bg-gradient-to-r from-green-400 to-green-600 hover:brightness-110 text-black font-semibold px-3 py-1 rounded-md shadow transition text-sm"
                       >
                         ✅
                       </button>
                     </td>
                   </tr>
-                ) : null
+                )
               )}
             </tbody>
           </table>
         </div>
-
-       
-        
       </div>
     </div>
   );

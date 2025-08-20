@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const host = "http://localhost:3000";
+const host = "https://todo-app-backend-1-mnu7.onrender.com";
 
-function callCreateAPI(apiPath, body) {
+async function callCreateAPI(apiPath, body) {
     return axios.post(host + apiPath, body)
         .then(response => {
             console.log(`got response from CreateAPI ${JSON.stringify(response.data)}`);
